@@ -28,3 +28,10 @@
   content: "";
   padding: 0;
 }
+
+.panel {
+  background: #e0e0e0
+}
+.panel2 {
+  background: #c0e0e0
+}

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My AngularJS App</title>
+   <link rel="stylesheet" href="../dist/css/bootstrap.css"/>
+   <link rel="stylesheet" href="css/app.css"/>
+ <script src="lib/angular/angular.js"></script>
+   <script src="js/TimeTerminalMain.js"></script>   
+</body>
+</head>
+<body>
+ 
+<div ng-app="timeTerminal">
+
+
+
+
+	<div ng-controller="TimeTerminalMainController">
+
+		<input type="text" ng-model="data.personId">
+
+		<div ng-repeat="row in layout.rows">
+			<span ng-repeat="col in row">
+				<button class="btn" ng-click="data.addToPersonId(col)"> {{ col }}</button>
+			</span>		
+		</div>
+	</div>
+	
+
+</div>
+
+
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="../dist/js/bootstrap.js"</script>
+
+  
+</html>
