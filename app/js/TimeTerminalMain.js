@@ -37,7 +37,7 @@ timeTerminal.factory("MemoryData", function() {
 				},
 
 				getAll : function() {
-					return this._data;
+					return _data;
 				}			
 
 	}
@@ -58,9 +58,12 @@ timeTerminal.factory("Layout", function() {
 				};
 });
 
-timeTerminal.factory("InputLogic", function() {
+timeTerminal.factory("InputLogic", function(MemoryData) {
 	return { 
 			personId: "",
+			errorMessageDisplayTime : 2000,
+			errorMessage : "",
+
 			 buttonPress: function(newValue) {
 	 			this.addValue(newValue);
 			 },
@@ -88,11 +91,44 @@ timeTerminal.factory("InputLogic", function() {
 					this.personId = newValues;
 				}
 			 },
-			 actionButtonPress : function(actionButton) {
-			 	alert("hej!");
-			 }
 
+
+			 actionButtonPress : function(actionButton) {
+			 	this.addAction(actionButton);
+			 },
+
+			 _getPerson : function() {
+			    	return MemoryData.getById(this.personId);
+			},
+
+			addAction : function(action) {
+				var person = this._getPerson();
+				if (person == null)
+				{
+				    this.showErrorMessage("Person not found");
+				}
+				else
+				{
+					console.log(action);
+					person.actions.push(action);
+					MemoryData.add(person);
+					MemoryData.save();
+					//self.actions.push(action);
+				}
+				this.clearValues();
+			},
+
+			showErrorMessage : function (text) {
+	    		this.errorMessage =text;
+	    		setTimeout(this.clearErrorMessage, this.errorMessageDisplayTime);
+			},
+
+			clearErrorMessage : function () {
+				this.errorMessage = "?";
 			}
+
+
+	}
 })
 
 

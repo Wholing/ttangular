@@ -18,6 +18,7 @@
 
 	<div ng-controller="TimeTerminalMainController">
 
+    
 		<input type="text" ng-model="inputLogic.personId">
 
 		<div ng-repeat="row in layout.rows">
@@ -29,9 +30,12 @@
     <br>
     <span ng-repeat="actionButton in layout.actionButtons">
       <span>
-        <button = class="btn" ng-click="inputLogic.actionButtonPress(button)"> {{ actionButton.description}}</button>
+        <button = class="btn" ng-click="inputLogic.actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
       </span>
     </span>
+    <div>{{inputLogic.errorMessage}}</div>
+
+
 	</div>
 	
 
