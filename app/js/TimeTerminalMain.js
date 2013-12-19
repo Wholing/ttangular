@@ -7,6 +7,42 @@ var Action = function(id, description)
 	this.description = description;
 };
 
+var Person = function(id, name)
+{
+	return {"id" : id, "name" : name, "actions": []};
+};
+
+timeTerminal.factory("MemoryData", function() {
+	return {
+				self : this,
+				_pendingdata : [],
+				_data : [],
+				
+				add : function(id, data){
+					toAdd = { 'id': id, 'data' : data};
+					this._pendingdata.push(toAdd);
+				},
+
+				save : function(){
+					this._data.push.apply(this._data, this._pendingdata);
+					this._pendingdata = [];
+				},
+
+				getById : function(id){
+					for (var i = this._data.length - 1; i >= 0; i--) {
+						if (this._data[i].id==id)
+						return this._data[i].data;
+					}; 
+					return null;
+				},
+
+				getAll : function() {
+					return this._data;
+				}			
+
+	}
+});
+
 
 timeTerminal.factory("Layout", function() {
 	//return {message: "data from service!"}
@@ -60,8 +96,11 @@ timeTerminal.factory("InputLogic", function() {
 })
 
 
-function TimeTerminalMainController($scope,Layout,InputLogic, $log)
+function TimeTerminalMainController($scope,Layout,InputLogic,MemoryData, $log)
 {
 	$scope.layout = Layout;
 	$scope.inputLogic = InputLogic;
+	$scope.data = MemoryData;
+	$scope.data.add(1, new Person(1,"Nils Nilsson"));
+	$scope.data.save();
 }
