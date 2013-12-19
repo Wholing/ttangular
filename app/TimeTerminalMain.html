@@ -18,18 +18,18 @@
 
 	<div ng-controller="TimeTerminalMainController">
 
-		<input type="text" ng-model="data.personId">
+		<input type="text" ng-model="inputLogic.personId">
 
 		<div ng-repeat="row in layout.rows">
 			<span ng-repeat="col in row">
-				<button class="btn" ng-click="data.buttonPress(col)"> {{ col }}</button>
+				<button class="btn" ng-click="inputLogic.buttonPress(col)"> {{ col }}</button>
 			</span>		
 		</div>
 
     <br>
     <span ng-repeat="actionButton in layout.actionButtons">
       <span>
-        <button = class="btn" ng-click="data.actionButtonPress(button)"> {{ actionButton.description}}</button>
+        <button = class="btn" ng-click="inputLogic.actionButtonPress(button)"> {{ actionButton.description}}</button>
       </span>
     </span>
 	</div>

@@ -1,5 +1,6 @@
 var timeTerminal = angular.module("timeTerminal", []);
 
+
 var Action = function(id, description)
 {
 	this.id = id;
@@ -21,7 +22,7 @@ timeTerminal.factory("Layout", function() {
 				};
 });
 
-timeTerminal.factory("Data", function() {
+timeTerminal.factory("InputLogic", function() {
 	return { 
 			personId: "",
 			 buttonPress: function(newValue) {
@@ -59,8 +60,8 @@ timeTerminal.factory("Data", function() {
 })
 
 
-function TimeTerminalMainController($scope,Layout,Data, $log)
+function TimeTerminalMainController($scope,Layout,InputLogic, $log)
 {
 	$scope.layout = Layout;
-	$scope.data = Data;
+	$scope.inputLogic = InputLogic;
 }
