@@ -5,13 +5,15 @@
   <title>My AngularJS App</title>
    <link rel="stylesheet" href="../dist/css/bootstrap.css"/>
    <link rel="stylesheet" href="css/app.css"/>
- <script src="lib/angular/angular.js"></script>
-   <script src="js/TimeTerminalMain.js"></script>   
+  <script src="lib/angular/angular.js"></script>
+   <script src="js/TimeTerminalMain.js"></script> 
+   <style type="text/css">
+   </style>  
 </body>
 </head>
 <body>
  
-<div ng-app="timeTerminal">
+<article ng-app="timeTerminal">
 
 
 
@@ -19,27 +21,29 @@
 	<div ng-controller="TimeTerminalMainController">
 
     
-		<input type="text" ng-model="inputLogic.personId">
+		<input type="text" ng-model="personId">
 
-		<div ng-repeat="row in layout.rows">
-			<span ng-repeat="col in row">
-				<button class="btn" ng-click="inputLogic.buttonPress(col)"> {{ col }}</button>
-			</span>		
-		</div>
+    <container id="numerickeys"> 
+		  <div ng-repeat="row in layout.rows">    
+			 <span ng-repeat="col in row">
+			   	<button class="btn" ng-click="buttonPress(col)"> {{ col }}</button>
+			 </span>		
+		  </div>
+    </container>
 
-    <br>
-    <span ng-repeat="actionButton in layout.actionButtons">
-      <span>
-        <button = class="btn" ng-click="inputLogic.actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
+    <container id="actionkeys">
+      <span ng-repeat="actionButton in layout.actionButtons">
+        <span>
+          <button = class="btn" ng-click="actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
+        </span>
       </span>
-    </span>
-    <div>{{inputLogic.errorMessage}}</div>
-
+      <div class="{{message.textClass}}" ng-show="message.visible">{{message.text}}</div>
+    </container>
 
 	</div>
 	
 
-</div>
+</article>
 
 
 

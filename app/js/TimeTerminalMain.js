@@ -61,82 +61,102 @@ timeTerminal.factory("Layout", function() {
 timeTerminal.factory("InputLogic", function(MemoryData) {
 	return { 
 			personId: "",
-			errorMessageDisplayTime : 2000,
-			errorMessage : "",
 
-			 buttonPress: function(newValue) {
-	 			this.addValue(newValue);
-			 },
-			 addValue: function(newValue) {
-			 	if (newValue=='<')
-					{
-						this.removeLastValue();
-						return;
-					}
-				if (newValue=="!")
-				{
-					this.clearValues();
-					return;
-				}
-			 	this.personId = this.personId + newValue;
-			 },
-			 clearValues: function() {
-			 	this.personId='';
-			 },
-			 removeLastValue : function() {
-			 	if (this.personId.length > 0)
-				{
-					var actualValues = this.personId;
-					var newValues = actualValues.substring(0, actualValues.length-1);
-					this.personId = newValues;
-				}
-			 },
-
-
-			 actionButtonPress : function(actionButton) {
-			 	this.addAction(actionButton);
-			 },
-
-			 _getPerson : function() {
-			    	return MemoryData.getById(this.personId);
-			},
-
-			addAction : function(action) {
-				var person = this._getPerson();
-				if (person == null)
-				{
-				    this.showErrorMessage("Person not found");
-				}
-				else
-				{
-					console.log(action);
-					person.actions.push(action);
-					MemoryData.add(person);
-					MemoryData.save();
-					//self.actions.push(action);
-				}
-				this.clearValues();
-			},
-
-			showErrorMessage : function (text) {
-	    		this.errorMessage =text;
-	    		setTimeout(this.clearErrorMessage, this.errorMessageDisplayTime);
-			},
-
-			clearErrorMessage : function () {
-				this.errorMessage = "?";
-			}
 
 
 	}
 })
 
 
-function TimeTerminalMainController($scope,Layout,InputLogic,MemoryData, $log)
+function TimeTerminalMainController($scope,Layout,InputLogic,MemoryData, $log, $timeout)
 {
 	$scope.layout = Layout;
-	$scope.inputLogic = InputLogic;
 	$scope.data = MemoryData;
 	$scope.data.add(1, new Person(1,"Nils Nilsson"));
 	$scope.data.save();
+
+	$scope.personId = "";
+	$scope.message = {
+		text : "some information",
+		textClass : "info",
+		visible : true,
+		displayTime : 2000
+	} 
+
+ 	$scope.buttonPress = function(newValue) {
+		$scope.addValue(newValue);
+	};
+
+	$scope.addValue = function(newValue) {
+	 	if (newValue=='<')
+			{
+				this.removeLastValue();
+				return;
+			}
+		if (newValue=="!")
+		{
+			$scope.clearValues();
+			return;
+		}
+	 	this.personId = this.personId + newValue;
+	}
+	
+	$scope.clearValues = function() {
+		$scope.personId='';
+ 	};
+			 
+	 $scope.removeLastValue = function() {
+	 	if ($scope.personId.length > 0)
+		{
+			var actualValues = $scope.personId;
+			var newValues = actualValues.substring(0, actualValues.length-1);
+			$scope.personId = newValues;
+		}
+	 };
+
+
+	$scope.actionButtonPress = function(actionButton) {
+	 	$scope.addAction(actionButton);
+	};
+
+	$scope._getPerson = function() {
+	    	return MemoryData.getById($scope.personId);
+	};
+
+	$scope.addAction = function(action) {
+		var person = this._getPerson();
+		if (person == null)
+		{
+		    $scope.showErrorMessage("Person not found");
+		}
+		else
+		{
+			person.actions.push(action);
+			MemoryData.add(person);
+			MemoryData.save();
+			$scope.showInfoMessage("Data saved.")
+			//self.actions.push(action);
+		}
+		$scope.clearValues();
+	};
+
+	$scope.showErrorMessage = function (text) {
+		$scope.showMessage(text, "btn-danger");
+	};
+
+	$scope.showInfoMessage = function (text) {
+		$scope.showMessage(text, "btn-success");
+	};
+
+	$scope.showMessage = function (text, textclass) {
+		$scope.message.text = text;
+		$scope.message.textClass = textclass;	
+		$scope.message.visible = true;	
+		$timeout($scope.clearMessage, $scope.message.displayTime);
+	};
+
+
+	$scope.clearMessage = function () {		
+		$scope.message.visible = false;
+	}	
 }
