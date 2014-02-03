@@ -141,11 +141,11 @@ function TimeTerminalMainController($scope,Layout,InputLogic,MemoryData, $log, $
 	};
 
 	$scope.showErrorMessage = function (text) {
-		$scope.showMessage(text, "btn-danger");
+		$scope.showMessage(text, "alert alert-danger");
 	};
 
 	$scope.showInfoMessage = function (text) {
-		$scope.showMessage(text, "btn-success");
+		$scope.showMessage(text, "alert alert-success");
 	};
 
 	$scope.showMessage = function (text, textclass) {

@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>My AngularJS App</title>
    <link rel="stylesheet" href="../dist/css/bootstrap.css"/>
+   <link rel="stylesheet" href="../dist/css/bootstrap-theme.min"/>   
    <link rel="stylesheet" href="css/app.css"/>
   <script src="lib/angular/angular.js"></script>
    <script src="js/TimeTerminalMain.js"></script> 
@@ -13,12 +14,12 @@
 </head>
 <body>
  
-<article ng-app="timeTerminal">
+<article class="row" ng-app="timeTerminal">
 
 
 
 
-	<div ng-controller="TimeTerminalMainController">
+	<div class="col-xs-12" ng-controller="TimeTerminalMainController">
 
     
 		<input type="text" ng-model="personId">
@@ -26,7 +27,7 @@
     <container id="numerickeys"> 
 		  <div ng-repeat="row in layout.rows">    
 			 <span ng-repeat="col in row">
-			   	<button class="btn" ng-click="buttonPress(col)"> {{ col }}</button>
+			   	<button class="btn btn-info" ng-click="buttonPress(col)"> {{ col }}</button>
 			 </span>		
 		  </div>
     </container>
@@ -34,7 +35,7 @@
     <container id="actionkeys">
       <span ng-repeat="actionButton in layout.actionButtons">
         <span>
-          <button = class="btn" ng-click="actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
+          <button = class="btn btn-primary" ng-click="actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
         </span>
       </span>
       <div class="{{message.textClass}}" ng-show="message.visible">{{message.text}}</div>
