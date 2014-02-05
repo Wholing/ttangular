@@ -5,14 +5,21 @@
   <title>My AngularJS App</title>
   <link rel="stylesheet" href="../dist/css/bootstrap.css"/>
   <link rel="stylesheet" href="css/app.css"/>
+
+  <!--[if IE]><script type="text/javascript" src="js/lib/excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="js/lib/coolclock.js"></script>
+<script type="text/javascript" src="js/lib/moreskins.js"></script>
+
 </head>
-<body>
+<body >
   <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
+    <li><a href="#/view1">Home</a></li>
+    <li><a href="#/view2">Registration summary</a></li>
   </ul>
 
   <div ng-view></div>
+
+  <button onclick="CoolClock.findAndCreateClocks()">
 
 <!--
   <div>Angular seed app: v<span app-version></span></div>

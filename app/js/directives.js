@@ -19,3 +19,16 @@ var ttDirectives = angular.module('myApp.directives', []).
     		};
 
   });
+
+
+    ttDirectives.directive('ttClock', function() {
+  	 return {
+      			templateUrl: 'partials/Clock.html',
+      			link : function()
+      			{
+      				CoolClock.findAndCreateClocks();
+      			}
+      			//template : '<span>MyDirective</span>'
+    		};
+
+  });
