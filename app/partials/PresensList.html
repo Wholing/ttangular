@@ -1,0 +1,29 @@
+
+ 	<div ng-repeat="person in dataList">    
+ 		<div class="row">
+ 			<h1 class="col-xs-5">{{ person.name}}</h1>
+ 		</div>
+
+ <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+			<th scope="col" class="col-xs-2">Direction</th>
+			<th scope="col" class="col-xs-3">Time</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr ng-repeat="action in person.actions track by $index">
+			<td scope="row">{{ action.description}}</td>
+			<td>{{ action.time}}</td>
+		</tr>
+		</tbody>
+	</table>
+	</div>
+
+ 	
+</p>
+<!--
+<span>{{text}}</span>
+<span> {{ data | json }}
+-->

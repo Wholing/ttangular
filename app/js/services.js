@@ -12,29 +12,84 @@ myServices.factory("MemoryData", function() {
 	return {
 				self : this,
 				_pendingdata : [],
-				_data : [],
-				
-				add : function(id, data){
-					var toAdd = { 'id': id, 'data' : data};
-					this._pendingdata.push(toAdd);
+				_data : [	{"id" : 1, "name" : "Nils Nilsson", "actions": []},
+							{"id" : 2, "name" : "Sven Svensson", "actions": []}
+						],
+				_index : 1, 
+
+
+				getIndex : function(id)
+				{
+					for (var i = this._data.length - 1; i >= 0; i--) {
+						if (this._data[i].id==id)
+						return i;
+					}; 
+					return -1;
+				},
+
+				add : function(data){
+					this._pendingdata.push(data);
 				},
 
 				save : function(){
-					this._data.push.apply(this._data, this._pendingdata);
+					for (var i = this._pendingdata.length - 1; i >= 0; i--) {
+						var index = this.getIndex(this._pendingdata[i].id);
+						if (index < 0)
+						{
+							this._data.push(this._pendingdata[i]);
+						}
+						else
+						{
+							this._data[index] = this._pendingdata[i];
+						}
+					}
 					this._pendingdata = [];
 				},
 
 				getById : function(id){
-					for (var i = this._data.length - 1; i >= 0; i--) {
-						if (this._data[i].id==id)
-						return this._data[i].data;
-					}; 
+					var index = this.getIndex(id);
+					if (index > -1)
+					{
+						return this._data[index];
+					}
 					return null;
 				},
 
 				getAll : function() {
 					return this._data;
-				}			
+				},
 
+				nextId : function() {
+					this._index++;
+					return this._index;
+				}	
+
+			}
+});
+
+var pad = function(num, size)
+{
+		    var s = num+"";
+		    while (s.length < size) s = "0" + s;
+		    return s;
+}
+
+myServices.factory("TimeServices", function() {
+
+	return {
+
+		currentDateTime :  function() {
+			var currentdate = new Date();
+			var currentmonth  = pad(currentdate.getMonth()+1, 2);
+			var currentday = pad(currentdate.getDate(), 2);
+			var toReturn= currentdate.getFullYear() + "-"
+			 					+ currentmonth + "-" 
+								+ currentday
+				                + " @ "  
+				                + currentdate.getHours() + ":"  
+				                + currentdate.getMinutes() + ":" 
+				                + currentdate.getSeconds();
+			return toReturn;
+		}
 	}
 });

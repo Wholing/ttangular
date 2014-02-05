@@ -7,13 +7,15 @@
 		};
   		
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', ['$scope','$timeout', 'MemoryData', function($scope, $timeout, MemoryData) {
+  controller('MyCtrl1', ['$scope','$timeout', 'MemoryData','TimeServices', function($scope, $timeout, MemoryData, TimeServices) {
   		
 
   		$scope.data = MemoryData;
+  		$scope.dataList = MemoryData.getAll();
 		//$scope.data.add(1, new Person(1,"Nils Nilsson"));
-		$scope.data.add(1, {"id" : 1, "name" : "Nils Nilsson", "actions": []});
-		$scope.data.save();
+		//$scope.data.add(1, {"id" : 1, "name" : "Nils Nilsson", "actions": []});
+		// $scope.data.add({"id" : 1, "name" : "Nils Nilsson", "actions": []});
+		// $scope.data.save();
 
 	  	$scope.layout = { rows: [ ["1","2","3"],
 						["4","5","6"],
@@ -32,7 +34,7 @@ angular.module('myApp.controllers', []).
 	$scope.message = {
 		text : "some information",
 		textClass : "info",
-		visible : true,
+		visible : false,
 		displayTime : 2000
 	} 
 
@@ -84,6 +86,8 @@ angular.module('myApp.controllers', []).
 		}
 		else
 		{
+			action.time = TimeServices.currentDateTime();
+			action.id = MemoryData.nextId();
 			person.actions.push(action);
 			MemoryData.add(person);
 			MemoryData.save();
@@ -119,6 +123,6 @@ angular.module('myApp.controllers', []).
 
   }])
   .controller('MyCtrl2', ['$scope','$timeout', 'MemoryData', function($scope, $timeout, MemoryData) {
-  	$scope.data = MemoryData.getAll();
+  	$scope.dataList = MemoryData.getAll();
   	$scope.text = "Hej!"
   }]);
