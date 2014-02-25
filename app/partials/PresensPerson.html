@@ -1,0 +1,36 @@
+<div class="" ng-show="numberOfActions>0">
+	<div class="row">
+		<h1 class="col-xs-3">{{ person.name}}</h1>
+		<button class="btn btn-default" ng-show="moreRowsExists" ng-click="showMore()">More ({{person.actions.length}})</button>
+	</div>
+
+	<div class="table-responsive">
+    	<table class="table table-bordered table-striped">
+      	<thead>
+        	<tr>
+				<th scope="col" class="col-xs-2">Direction</th>
+				<th scope="col" class="col-xs-3">Time</th>
+			</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="action in person.actions | limitTo:limitToInternal track by $index ">
+					<td scope="row">{{ action.description}}</td>
+					<td>{{ action.time}}</td>
+				</tr>
+			</tbody>
+
+		</table>
+	
+	<!--
+		<div> {{ person | json}}</div>
+		
+		
+		<div>More rows exists: {{moreRowsExists}}</div>
+
+		<div>List limited to: {{ limitToInternal }}</div>
+		<div> Number of actions: {{ person.actions.length}}</div>
+		<div>evaluation: {{ limitToInternal < person.actions.length }}
+	-->
+
+	</div>
+</div>	

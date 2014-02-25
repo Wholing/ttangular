@@ -1,11 +1,19 @@
 
 
- <span tt-clock></span>
-
+<container class="container-fluid">
+  
+      <aside class="pull-right float:right col-xs-5">
+        <tt-presens-person person="last.person" limit-to="2"/>
+      </aside>
     
-	<input type="text" ng-model="personId">
+ <div class="col-xs-5 float:left {{message.textClass}}" ng-show="message.visible">{{message.text}}</div>
 
+  <div class="col">
+    <span tt-clock ng-show="showClock"></span>
+    <input type="text" ng-hide="showClock" ng-model="personId">
+  </div>
 
+  <div class="col">   
     <container class="row" id="numerickeys"> 
   
       <div class="col-xs-7" >
@@ -21,16 +29,16 @@
           <button = class="btn btn-primary" ng-click="actionButtonPress(actionButton)"> {{ actionButton.description}}</button>
         </span>
       </span>
-      <div class="float:left {{message.textClass}}" ng-show="message.visible">{{message.text}}</div>
+     
     </container>
       </div>
   
-      <aside class="col-xs-5">
-        <span tt-presenslist></span>
-      </aside>
+</container>
+  </div>    
+      
 
-    </container>
- 
+
+</container> 
  
 
   

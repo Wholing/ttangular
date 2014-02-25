@@ -12,8 +12,15 @@ myServices.factory("MemoryData", function() {
 	return {
 				self : this,
 				_pendingdata : [],
-				_data : [	{"id" : 1, "name" : "Nils Nilsson", "actions": []},
-							{"id" : 2, "name" : "Sven Svensson", "actions": []}
+				_data : [	
+
+				{ "id": 1, "name": "Nils Nilsson", "actions": [ { "id": 4, "description": "In", "time": "2014-02-24 @ 23:16:44" }, { "id": 4, "description": "In", "time": "2014-02-24 @ 23:16:44" }, { "id": 4, "description": "In", "time": "2014-02-24 @ 23:16:44" } ] },
+				//{"id" : 1, "name" : "Nils Nilsson", "actions": []},
+							{"id" : 2, "name" : "Sven Svensson", "actions": []},
+							{"id" : 3, "name" : "Jan Jansson", "actions": []},
+							{"id" : 4, "name" : "Per Persson", "actions": []},
+							{"id" : 5, "name" : "Rune Runesson", "actions": []},
+							{"id" : 6, "name" : "Ivar Ivarsson", "actions": []}
 						],
 				_index : 1, 
 

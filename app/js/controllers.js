@@ -31,12 +31,18 @@ angular.module('myApp.controllers', []).
 
 
 	$scope.personId = "";
+
+	$scope.showClock = true;
 	$scope.message = {
 		text : "some information",
 		textClass : "info",
 		visible : false,
 		displayTime : 2000
 	} 
+	$scope.last = { person : null,
+					action : null
+					} 
+
 
  	$scope.buttonPress = function(newValue) {
 		$scope.addValue(newValue);
@@ -54,6 +60,7 @@ angular.module('myApp.controllers', []).
 			return;
 		}
 	 	this.personId = this.personId + newValue;
+		$scope.showClock = false;
 	}
 	
 	$scope.clearValues = function() {
@@ -72,6 +79,7 @@ angular.module('myApp.controllers', []).
 
 	$scope.actionButtonPress = function(actionButton) {
 	 	$scope.addAction(actionButton);
+	 	$scope.showClock = true;
 	};
 
 	$scope._getPerson = function() {
@@ -91,7 +99,8 @@ angular.module('myApp.controllers', []).
 			person.actions.push(action);
 			MemoryData.add(person);
 			MemoryData.save();
-			$scope.showInfoMessage("Data saved.")
+			$scope.showInfoMessage("Data saved.");
+			$scope.last.person = person;
 			//self.actions.push(action);
 		}
 		$scope.clearValues();
@@ -116,8 +125,6 @@ angular.module('myApp.controllers', []).
 	$scope.clearMessage = function () {		
 		$scope.message.visible = false;
 	}	
-
-
 
 
 
