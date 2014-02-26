@@ -7,7 +7,7 @@
 		};
   		
 angular.module('myApp.controllers', []).
-  controller('MyCtrl1', ['$scope','$timeout', 'MemoryData','TimeServices', function($scope, $timeout, MemoryData, TimeServices) {
+  controller('MyCtrl1', ['$scope','$timeout', 'MemoryData','TimeServices', 'InputValidation', function($scope, $timeout, MemoryData, TimeServices, InputValidation) {
   		
 
   		$scope.data = MemoryData;
@@ -86,7 +86,7 @@ angular.module('myApp.controllers', []).
 	    	return MemoryData.getById($scope.personId);
 	};
 
-	$scope.addAction = function(action) {
+	$scope.addAction = function(actionButton) {
 		var person = this._getPerson();
 		if (person == null)
 		{
@@ -94,13 +94,23 @@ angular.module('myApp.controllers', []).
 		}
 		else
 		{
-			action.time = TimeServices.currentDateTime();
-			action.id = MemoryData.nextId();
-			person.actions.push(action);
-			MemoryData.add(person);
-			MemoryData.save();
-			$scope.showInfoMessage("Data saved.");
-			$scope.last.person = person;
+			var action = {	"id": MemoryData.nextId(), 
+							"description": actionButton.description,
+							"time": TimeServices.currentDateTime(),
+						};
+			
+			var validationResult = InputValidation.validateAction(person, action);
+			if ( validationResult.value != 0)
+			{
+				$scope.showErrorMessage(validationResult.message);
+			}
+			else {
+				person.actions.push(action);
+				MemoryData.add(person);
+				MemoryData.save();
+				$scope.showInfoMessage("Data saved.");
+				$scope.last.person = person;
+			}
 			//self.actions.push(action);
 		}
 		$scope.clearValues();

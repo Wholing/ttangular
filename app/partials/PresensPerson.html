@@ -13,7 +13,9 @@
 			</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="action in person.actions | limitTo:limitToInternal track by $index ">
+			<!-- orderBy:time:reverse -->
+			<!-- limitTo:limitToInternal -->
+				<tr ng-repeat="action in person.actions |  orderBy:action.time:true | limitTo:limitToInternal track by action.time">
 					<td scope="row">{{ action.description}}</td>
 					<td>{{ action.time}}</td>
 				</tr>
@@ -22,8 +24,8 @@
 		</table>
 	
 	<!--
-		<div> {{ person | json}}</div>
 		
+		<div> {{ person | json}}</div>
 		
 		<div>More rows exists: {{moreRowsExists}}</div>
 
