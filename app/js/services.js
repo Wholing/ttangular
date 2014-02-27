@@ -106,7 +106,7 @@ myServices.factory("MemoryData", function() {
 				_pendingdata : [],
 				_data : [	
 
-				{ "id": 1, "name": "Nils Nilsson", "actions": [ { "id": 4, "description": "In", "time": "2014-02-24 @ 23:16:44" }, { "id": 4, "description": "In", "time": "2014-02-24 @ 23:19:44" }, { "id": 4, "description": "In", "time": "2014-02-24 @ 23:22:44" } ] },
+				{ "id": 1, "name": "Nils Nilsson", "actions": [ { "id": 4, "description": "In", "time": "2014-02-24 @ 23:16:44" }, { "id": 4, "description": "Out", "time": "2014-02-24 @ 23:19:44" }, { "id": 4, "description": "In", "time": "2014-02-24 @ 23:22:44" } ] },
 				//{"id" : 1, "name" : "Nils Nilsson", "actions": []},
 							{"id" : 2, "name" : "Sven Svensson", "actions": []},
 							{"id" : 3, "name" : "Jan Jansson", "actions": []},

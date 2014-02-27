@@ -1,6 +1,6 @@
 <div class="" ng-show="numberOfActions>0">
-	<div class="row">
-		<h1 class="col-xs-3">{{ person.name}}</h1>
+	<div class="row">		
+		<h2 class="col-xs-3">({{ person.id}}) {{ person.name}}</h2>
 		<button class="btn btn-default" ng-show="moreRowsExists" ng-click="showMore()">More ({{person.actions.length}})</button>
 	</div>
 
@@ -15,18 +15,19 @@
 			<tbody>
 			<!-- orderBy:time:reverse -->
 			<!-- limitTo:limitToInternal -->
-				<tr ng-repeat="action in person.actions |  orderBy:action.time:true | limitTo:limitToInternal track by action.time">
+			<!--   -->
+				<tr ng-repeat="action in person.actions | orderBy:'time':true | limitTo:limitToInternal track by action.time">
 					<td scope="row">{{ action.description}}</td>
 					<td>{{ action.time}}</td>
 				</tr>
 			</tbody>
 
 		</table>
-	
+		
 	<!--
 		
-		<div> {{ person | json}}</div>
 		
+		<div> {{ person | json}}</div>
 		<div>More rows exists: {{moreRowsExists}}</div>
 
 		<div>List limited to: {{ limitToInternal }}</div>
