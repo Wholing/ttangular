@@ -112,7 +112,9 @@ myServices.factory("MemoryData", function() {
 							{"id" : 3, "name" : "Jan Jansson", "actions": []},
 							{"id" : 4, "name" : "Per Persson", "actions": []},
 							{"id" : 5, "name" : "Rune Runesson", "actions": []},
-							{"id" : 6, "name" : "Ivar Ivarsson", "actions": []}
+							{"id" : 6, "name" : "Ivar Ivarsson", "actions": []},
+							{"id" : 7, "name" : "Orvar Burjesson", "actions": []},
+							{"id" : 8, "name" : "Locko Flack", "actions": []}
 						],
 				_index : 1, 
 
